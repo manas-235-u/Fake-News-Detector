@@ -109,7 +109,7 @@ print(classification_report(y_test, y_pred))
 # -------------------------------
 # Manual News Prediction
 # -------------------------------
-
+#trying adding commnt
 def predict_news(news):
 
     news = clean_text(news)
