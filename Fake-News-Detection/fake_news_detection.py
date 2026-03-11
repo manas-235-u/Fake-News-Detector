@@ -8,9 +8,7 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 
 
-# -------------------------------
 # Load Datasets
-# -------------------------------
 
 fake = pd.read_csv("Fake.csv")
 true = pd.read_csv("True.csv")
@@ -32,9 +30,7 @@ data = data[["title", "text", "label"]]
 data["content"] = data["title"] + " " + data["text"]
 
 
-# -------------------------------
 # Text Cleaning Function
-# -------------------------------
 
 def clean_text(text):
     
@@ -49,51 +45,41 @@ def clean_text(text):
 data["content"] = data["content"].apply(clean_text)
 
 
-# -------------------------------
 # Input and Output
-# -------------------------------
+
 
 X = data["content"]
 y = data["label"]
 
 
-# -------------------------------
 # Convert Text to Numbers
-# -------------------------------
 
 vectorizer = TfidfVectorizer(stop_words="english", max_df=0.7)
 
 X = vectorizer.fit_transform(X)
 
 
-# -------------------------------
 # Train Test Split
-# -------------------------------
 
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42
 )
 
 
-# -------------------------------
 # Train Model
-# -------------------------------
+
 
 model = MultinomialNB()
 
 model.fit(X_train, y_train)
 
-
-# -------------------------------
 # Prediction
-# -------------------------------
 
 y_pred = model.predict(X_test)
 
 
-# -------------------------------
 # Model Evaluation
-# -------------------------------
+
 
 accuracy = accuracy_score(y_test, y_pred)
 
@@ -106,9 +92,9 @@ print("\nClassification Report:")
 print(classification_report(y_test, y_pred))
 
 
-# -------------------------------
+
 # Manual News Prediction
-# -------------------------------
+
 
 def predict_news(news):
 
